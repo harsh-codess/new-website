@@ -13,16 +13,17 @@ A clean, minimalist, and fully responsive portfolio template for developers. Des
 - [License](#license)
 - [Credits](#credits)
 
-## Features:
+## Features
 
 - **Minimalist Design** – Clean, modern UI with a focus on simplicity.
 - **Responsive Layout** – Works perfectly on all screen sizes.
-- **SEO-Friendly** – Optimized for search engines.
 - **Easy to Customize** – Simple HTML and CSS structure.
-- **Smooth Scrolling** – Powered by [Lenis](https://github.com/studio-freight/lenis).
-- **Scroll Animations** – Built with [GSAP ScrollTrigger](https://greensock.com/scrolltrigger/).
+- **Smooth Scrolling** – Powered by [Lenis](https://lenis.darkroom.engineering/).
+- **Scroll Animations** – Built with [GSAP ScrollTrigger](https://gsap.com/).
 
-## Live Demo:
+## Live Demo
+
+Check out the template in action:
 
 [View Demo](https://hhlitval.github.io/minimalist-portfolio/)
 
@@ -32,7 +33,7 @@ Tested using **Google Lighthouse** for speed, accessibility, and SEO optimizatio
 
 ![Lighthouse Report](./demo/lighthouse-report.jpg)
 
-## Usage:
+## Usage
 
 1. **Clone the repository:**
    ```bash
@@ -40,15 +41,15 @@ Tested using **Google Lighthouse** for speed, accessibility, and SEO optimizatio
    ```
 2. **Update the template**
 
-- Replace **text, images, and links** with your own.
-- Modify **styles** in `style.scss`.
+   - Replace **text, images, and links** with your own.
+   - Modify **styles** in `style.scss`.
 
 3. **Deploy and enjoy!**
 
-## License:
+## License
 
-This project is open-source under the **MIT License**.
+This project is open-source and licensed under the [MIT License](LICENSE).
 
-## Credits:
+## Credits
 
-**Designed & developed by Alex Litvin – [alexlitvin.com](https://alexlitvin.com)**.
+**Designed & developed by Alex Litvin – [alexlitvin.com](https://alexlitvin.com)**

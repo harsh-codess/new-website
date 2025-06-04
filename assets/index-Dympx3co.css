@@ -430,6 +430,9 @@ body a{
 .projects{
     background-color:#fff
 }
+
+
+
 .projects-container{
     margin-top:clamp(3rem,2.318rem + 3.41vw,4.5rem);
     display:grid;

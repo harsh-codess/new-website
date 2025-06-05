@@ -124,129 +124,201 @@
       .projects-item {
         display: flex;
         flex-direction: column;
-        row-gap: 18px;
+        background: transparent;
+        box-sizing: border-box;
+        min-height: 480px;
+        max-height: none;
+        height: auto;
         width: 100%;
         max-width: 500px;
-      }
-      
-      .projects-item__content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .projects-item__text {
-        flex: 1;
-      }
-      
-      .projects-item__content p {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.6);
-        margin-bottom: 0.5rem;
-      }
-      
-      .projects-item__content h3 {
-        font-size: 1.2rem;
-        font-weight: 500;
+        border-radius: 0;
+        overflow: visible;
+        border: none;
       }
       
       .projects-item__img {
         position: relative;
+        width: 100%;
+        height: 320px;
+        min-height: 320px;
+        max-height: 320px;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         overflow: hidden;
+        border-radius: 8px;
       }
       
       .projects-item__img img {
-        aspect-ratio: 1.2/1;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 5px;
         width: 100%;
-        transition: transform 0.3s ease;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        border-radius: 8px;
+        display: block;
+        background: transparent;
       }
       
-      .projects-item:hover .projects-item__img img {
-        transform: scale(1.02);
-      }
-      
-      /* Project Button Styles */
-      .project-btn-container {
+      .projects-item__content {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 4px;
+        align-items: flex-start;
+        gap: 0.3em;
+        position: relative;
+        flex: 1 1 auto;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 1.2em 0;
+        box-sizing: border-box;
+        min-height: 0;
+        overflow: visible;
       }
       
-      .project-btn-hint {
-        font-size: 10px;
-        color: rgba(255, 255, 255, 0.5);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-weight: 300;
-        opacity: 0;
-        transition: opacity 0.2s ease;
+      .projects-item__content h3 {
+        text-align: center;
+        width: 100%;
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
       }
       
-      .project-btn-container:hover .project-btn-hint {
+      .project-tagline {
+        color: #cccccc;
+        font-size: 0.95em;
+        opacity: 0.85;
+        margin-bottom: 0.2em;
+        margin-top: 0.2em;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .project-toggle-btn {
+        color: #ffffff;
+        background: none;
+        border: none;
+        font-size: 1em;
+        cursor: pointer;
+        text-align: left;
+        padding: 0.2em 0 0.2em 0;
+        transition: color 0.2s;
+        font-family: inherit;
+        opacity: 0.8;
+        width: 100%;
+      }
+      
+      .project-toggle-btn:hover {
+        color: #87b37a;
         opacity: 1;
+      }
+      
+      /* Project Details Enhancement */
+      .project-details {
+        background: rgba(30, 30, 30, 0.5);
+        color: #ffffff;
+        border-radius: 8px;
+        margin: 0.5em 0;
+        padding: 1.5em;
+        font-size: 0.98em;
+        box-shadow: none;
+        line-height: 1.5;
+        opacity: 1;
+        width: 100%;
+        transition: max-height 0.3s;
+        min-height: 0;
+        overflow: visible;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .project-details h4 {
+        margin: 1em 0 0.5em;
+        color: #87b37a;
+        font-weight: 500;
+      }
+      
+      .project-details ul {
+        margin: 0.5em 0;
+        padding-left: 1.2em;
+      }
+      
+      .project-details li {
+        margin-bottom: 0.3em;
+      }
+      
+      .project-details .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        margin: 0.7em 0;
+      }
+      
+      .project-details .tech-tag {
+        background: rgba(135, 179, 122, 0.2);
+        color: #87b37a;
+        padding: 0.2em 0.7em;
+        border-radius: 12px;
+        font-size: 0.85em;
+        font-weight: 500;
+      }
+      
+      .project-details .screenshot {
+        width: 100%;
+        border-radius: 4px;
+        margin: 1em 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .project-links {
+        display: flex;
+        gap: 1em;
+        margin-top: 1em;
+      }
+      
+      .project-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
+        color: #87b37a;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.2s;
+      }
+      
+      .project-links a:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+      }
+      
+      .project-details a {
+        color: #87b37a;
+        text-decoration: underline;
+        font-weight: 500;
       }
       
       .project-btn {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #fff;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
+        align-self: flex-end;
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 1.5em;
         cursor: pointer;
-        transition: all 0.2s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        opacity: 0.7;
+        padding: 0.1em 0.2em;
+        transition: color 0.2s;
+        font-family: inherit;
+        opacity: 0.8;
+        margin-top: 0.2em;
       }
       
       .project-btn:hover {
-        border-color: rgba(255, 255, 255, 0.6);
+        color: #87b37a;
         opacity: 1;
-        transform: scale(1.05);
-        background: rgba(255, 255, 255, 0.05);
       }
-      
-      .project-btn:active {
-        transform: scale(0.95);
-      }
-      
-      .project-btn span {
-        line-height: 1;
-        font-weight: 300;
-      }
-      
-      /* Category Filters */
-      .filter-container {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
-      }
-      
-      .filter-btn {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: rgba(255, 255, 255, 0.7);
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        font-size: 0.875rem;
-      }
-      
-      .filter-btn:hover,
-      .filter-btn.active {
-        border-color: rgba(255, 255, 255, 0.6);
-        color: #fff;
-        background: rgba(255, 255, 255, 0.05);
+
+      /* Remove old styles */
+      .project-btn-container,
+      .project-btn-hint,
+      .project-buttons {
+        display: none;
       }
       
       /* Footer */
@@ -260,6 +332,66 @@
       .footer p {
         color: rgba(255, 255, 255, 0.5);
         font-size: 0.875rem;
+      }
+
+      /* Category Filters */
+      .filter-container {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+      
+      .filter-btn {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0.8);
+        padding: 0.7rem 1.5rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.875rem;
+        font-weight: 400;
+      }
+      
+      .filter-btn:hover,
+      .filter-btn.active {
+        border-color: #87b37a;
+        color: #ffffff;
+        background: rgba(135, 179, 122, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(135, 179, 122, 0.2);
+      }
+      
+      /* Focus indicators for accessibility */
+      .project-toggle-btn:focus,
+      .project-btn:focus,
+      .filter-btn:focus,
+      a:focus {
+        outline: 2px solid #87b37a;
+        outline-offset: 2px;
+      }
+      
+      /* Button focus styles */
+      button:focus {
+        outline: 2px solid #87b37a;
+        outline-offset: 2px;
+      }
+      
+      /* Lazy loading styles */
+      .projects-item__img img {
+        transition: filter 0.3s ease, opacity 0.3s ease;
+      }
+      
+      .projects-item__img img[loading="lazy"] {
+        filter: blur(5px);
+        opacity: 0.7;
+      }
+      
+      .projects-item__img img.loaded {
+        filter: none;
+        opacity: 1;
       }
     </style>
   </head>
@@ -289,239 +421,537 @@
 
         <section class="projects">
           <div class="projects-container">
-            <!-- Existing Projects -->
+            <!-- Existing Projects with accordion structure -->
             <div class="projects-item" data-category="ai-ml">
               <div class="projects-item__img">
-                <img src="images/projects/bot.png" alt="LCEL Chatbot" />
+                <img src="images/projects/bot.png" alt="LCEL Chatbot" loading="lazy" />
               </div>
               <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>001</p>
-                  <h3>LCEL Chatbot</h3>
+                <p>001</p>
+                <h3>LCEL Chatbot</h3>
+                <div class="project-tagline">LangChain, Python, Streamlit</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>An advanced conversational AI chatbot built using LangChain Expression Language (LCEL) that provides dynamic, context-aware responses to user queries.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This chatbot leverages the power of LangChain Expression Language to create flexible conversation flows with memory capabilities and context management. The implementation uses Streamlit for an intuitive user interface that handles real-time interactions.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">LangChain</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">LLMs</span>
+                    <span class="tech-tag">ConversationBufferMemory</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Context-aware conversations with memory retention</li>
+                    <li>Custom prompt templates optimized for natural dialogue</li>
+                    <li>Seamless integration with multiple LLM providers</li>
+                    <li>Real-time response generation with streaming capability</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>The primary challenges included designing effective prompt engineering strategies, managing conversation context over multiple turns, and creating a responsive UI for real-time interactions.</p>
+                  <p>These were addressed through implementation of buffer memory systems, custom prompt templates, and optimized Streamlit components for chat experiences.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/LCEL-BASED-CHATBOT" target="_blank">GitHub Repo →</a>
+                  </div>
                 </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">view on github</span>
-                  <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/LCEL-BASED-CHATBOT', '_blank')" title="View on GitHub">
-                    <span>→</span>
-                  </button>
-                </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/LCEL-BASED-CHATBOT', '_blank')">
+                  <span>→</span>
+                </button>
               </div>
             </div>
 
             <div class="projects-item" data-category="ai-ml">
               <div class="projects-item__img">
-                <img src="images/projects/download (6).jpeg" alt="BERT Visualization" />
+                <img src="images/projects/download (6).jpeg" alt="BERT Visualization" loading="lazy" />
               </div>
               <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>002</p>
-                  <h3>BERT Visualization</h3>
+                <p>002</p>
+                <h3>BERT Visualization</h3>
+                <div class="project-tagline">BERT, NLP, Visualization</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>An interactive tool that visualizes the inner workings of BERT (Bidirectional Encoder Representations from Transformers) for enhanced explainability in NLP tasks.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project aims to demystify BERT's black-box nature by providing visualizations of attention patterns, token embeddings, and layer representations. The tool helps researchers and practitioners understand how BERT processes and interprets language.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">Hugging Face</span>
+                    <span class="tech-tag">D3.js</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">Transformers</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Multi-layer attention visualization with heat maps</li>
+                    <li>Token embedding space projection using t-SNE/UMAP</li>
+                    <li>Interactive exploration of self-attention mechanisms</li>
+                    <li>Contextual word embedding analysis</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Extracting meaningful data from BERT's complex architecture required careful implementation to access intermediate layers and attention mechanisms. The visualization interface needed to be both informative and intuitive for users without compromising performance.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/BERT-VIZ" target="_blank">GitHub Repo →</a>
+                  </div>
                 </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">view on github</span>
-                  <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/BERT-VIZ', '_blank')" title="View on GitHub">
-                    <span>→</span>
-                  </button>
-                </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/BERT-VIZ', '_blank')">
+                  <span>→</span>
+                </button>
               </div>
             </div>
 
             <div class="projects-item" data-category="data">
               <div class="projects-item__img">
-                <img src="images/projects/unnamed.png" alt="Customer Churn Analysis" />
+                <img src="images/projects/unnamed.png" alt="Customer Churn Analysis" loading="lazy" />
               </div>
               <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>003</p>
-                  <h3>Customer Churn Analysis</h3>
-                </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">view on github</span>
-                  <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/CUSTOMER-CHURN-ANALYSIS', '_blank')" title="View on GitHub">
-                    <span>→</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="projects-item" data-category="ai-ml">
-              <div class="projects-item__img">
-                <img src="images/projects/group-2953-3-1.png" alt="YouTube Summarizer" />
-              </div>
-              <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>004</p>
-                  <h3>YouTube Summarizer</h3>
-                </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">view on github</span>
-                  <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/SUMMARIZER', '_blank')" title="View on GitHub">
-                    <span>→</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="projects-item" data-category="ai-ml">
-              <div class="projects-item__img">
-                <img src="images/projects/resume.png" alt="NLP Resume Parser" />
-              </div>
-              <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>005</p>
-                  <h3>NLP Resume Parser</h3>
-                </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">view on github</span>
-                  <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/NLP-RESUME-PARSER', '_blank')" title="View on GitHub">
-                    <span>→</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="projects-item" data-category="ai-ml">
-              <div class="projects-item__img">
-                <img src="images/projects/chatgpt.jpeg" alt="OpenAI Chatbot" />
-              </div>
-              <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>006</p>
-                  <h3>OpenAI Chatbot</h3>
-                </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">view on github</span>
-                  <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/llm-openai-app', '_blank')" title="View on GitHub">
-                    <span>→</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-<!-- Additional Projects -->
-            <div class="projects-item" data-category="ai-ml">
-              <div class="projects-item__img">
-                <img src="images\projects\ollama.png" alt="Ollama LLM Chatbot" />
-              </div>
-              <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>007</p>
-                  <h3>Ollama LLM Chatbot</h3>
-                </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">github</span>
-                  <div class="project-buttons">
-                    <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/llm-ollama-app', '_blank')" title="View on GitHub">
-                      <span>→</span>
-                    </button>
+                <p>003</p>
+                <h3>Customer Churn Analysis</h3>
+                <div class="project-tagline">ML, Data Analysis, Python</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>A comprehensive machine learning solution that predicts customer churn probability to help businesses retain customers and optimize retention strategies.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project utilizes advanced machine learning algorithms to identify patterns in customer behavior that indicate potential churn. The analysis includes data preprocessing, feature engineering, model selection, and evaluation with actionable insights for business stakeholders.</p>
+                  
+                  <img src="images/projects/churn-dashboard.jpg" alt="Churn Analysis Dashboard" class="screenshot">
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Scikit-learn</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">XGBoost</span>
+                    <span class="tech-tag">Matplotlib</span>
+                    <span class="tech-tag">Seaborn</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Multi-model comparison (Random Forest, XGBoost, Logistic Regression)</li>
+                    <li>Feature importance analysis for business insights</li>
+                    <li>Customer segmentation based on churn risk</li>
+                    <li>Interactive visualizations for pattern discovery</li>
+                    <li>ROC curve and confusion matrix evaluation</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Handling imbalanced class distribution in churn data required implementing SMOTE for synthetic sampling. Feature engineering involved creating complex behavioral indicators from raw transactional data. The model selection process required extensive hyperparameter tuning to maximize both precision and recall.</p>
+                  
+                  <h4>Results</h4>
+                  <p>The final model achieved 89% accuracy with 0.92 AUC, identifying ~78% of customers at risk of churning, allowing for targeted retention strategies that reduced churn by an estimated 23% in validation tests.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/CUSTOMER-CHURN-ANALYSIS" target="_blank">GitHub Repo →</a>
                   </div>
                 </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/CUSTOMER-CHURN-ANALYSIS', '_blank')">
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="projects-item" data-category="ai-ml">
+              <div class="projects-item__img">
+                <img src="images/projects/group-2953-3-1.png" alt="YouTube Summarizer" loading="lazy" />
+              </div>
+              <div class="projects-item__content">
+                <p>004</p>
+                <h3>YouTube Summarizer</h3>
+                <div class="project-tagline">GenAI, Summarization, Python</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>Summarizes YouTube videos using generative AI models.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project focuses on building a summarization tool that can process YouTube video content and generate concise summaries, aiding in quick content consumption.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">OpenAI API</span>
+                    <span class="tech-tag">YouTube API</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">Python</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Extracts video transcripts and generates summaries</li>
+                    <li>Supports multiple languages and video formats</li>
+                    <li>Customizable summary length and detail level</li>
+                    <li>Integration with Notion for saving summaries</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Key challenges included handling various video formats, ensuring accurate transcript extraction, and generating coherent summaries. These were addressed by leveraging robust APIs and implementing effective error handling and data validation mechanisms.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/SUMMARIZER" target="_blank">GitHub Repo →</a>
+                  </div>
+                </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/SUMMARIZER', '_blank')">
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="projects-item" data-category="ai-ml">
+              <div class="projects-item__img">
+                <img src="images/projects/resume.png" alt="NLP Resume Parser" loading="lazy" />
+              </div>
+              <div class="projects-item__content">
+                <p>005</p>
+                <h3>NLP Resume Parser</h3>
+                <div class="project-tagline">NLP, Resume Parsing, Python</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>Extracts structured data from resumes using NLP techniques.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project aims to automate the extraction of key information from resumes, such as skills, experience, and education, to facilitate efficient candidate screening.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">spaCy</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Pandas</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Extracts and categorizes resume information</li>
+                    <li>Supports multiple resume formats (PDF, DOCX, etc.)</li>
+                    <li>Customizable extraction templates</li>
+                    <li>Integration with HR systems for seamless workflow</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Challenges included dealing with the variability in resume formats and structures, and ensuring high accuracy in information extraction. These were tackled by using a combination of rule-based and machine learning approaches for robust parsing capabilities.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/NLP-RESUME-PARSER" target="_blank">GitHub Repo →</a>
+                  </div>
+                </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/NLP-RESUME-PARSER', '_blank')">
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="projects-item" data-category="ai-ml">
+              <div class="projects-item__img">
+                <img src="images/projects/chatgpt.jpeg" alt="OpenAI Chatbot" loading="lazy" />
+              </div>
+              <div class="projects-item__content">
+                <p>006</p>
+                <h3>OpenAI Chatbot</h3>
+                <div class="project-tagline">OpenAI, LLM, Web App</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>Chatbot powered by OpenAI APIs for natural conversations.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project involves creating a chatbot application that utilizes OpenAI's language models to engage in human-like conversations, answer questions, and provide information on various topics.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">OpenAI API</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">HTML/CSS</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Natural language understanding and generation</li>
+                    <li>Contextual awareness for follow-up questions</li>
+                    <li>Multi-turn conversation handling</li>
+                    <li>Customizable response templates</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Integrating with OpenAI's API and managing the conversation context were the main challenges. These were addressed by implementing a robust backend in Flask to handle API requests and session management.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/llm-openai-app" target="_blank">GitHub Repo →</a>
+                  </div>
+                </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/llm-openai-app', '_blank')">
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="projects-item" data-category="ai-ml">
+              <div class="projects-item__img">
+                <img src="images/projects/ollama.png" alt="Ollama LLM Chatbot" loading="lazy" />
+              </div>
+              <div class="projects-item__content">
+                <p>007</p>
+                <h3>Ollama LLM Chatbot</h3>
+                <div class="project-tagline">Ollama, Local LLM, Python</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>Local LLM chatbot using Ollama for private conversations.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project focuses on building a chatbot that runs locally using Ollama, ensuring privacy and data security for sensitive conversations.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Ollama</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Flask</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Local deployment for enhanced privacy</li>
+                    <li>Customizable conversation flows</li>
+                    <li>Integration with local data sources</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Optimizing the LLM for local performance and ensuring seamless user interactions were the key challenges. These were addressed by fine-tuning the model and optimizing the Flask application for local server deployment.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/llm-ollama-app" target="_blank">GitHub Repo →</a>
+                  </div>
+                </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/llm-ollama-app', '_blank')">
+                  <span>→</span>
+                </button>
               </div>
             </div>
 
             <div class="projects-item" data-category="web">
               <div class="projects-item__img">
-                <img src="images\projects\download (4).png" alt="Apple Website Clone" />
+                <img src="images/projects/download (4).png" alt="Apple Website Clone" loading="lazy" />
               </div>
               <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>008</p>
-                  <h3>Apple Website Clone</h3>
-                </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">github • live demo</span>
-                  <div class="project-buttons">
-                    <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/apple-website-clone', '_blank')" title="View on GitHub">
-                      <span>→</span>
-                    </button>
-                    <button class="project-btn live-btn" onclick="window.open('https://clonewebs2.netlify.app/', '_blank')" title="View Live Demo">
-                      <span>↗</span>
-                    </button>
+                <p>008</p>
+                <h3>Apple Website Clone</h3>
+                <div class="project-tagline">HTML, CSS, JavaScript</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>Pixel-perfect clone of Apple's website with animations.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project involved recreating Apple's website homepage with high fidelity, focusing on responsive design and smooth animations to mimic the original site.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">GSAP</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Responsive layout adapting to various screen sizes</li>
+                    <li>Smooth scrolling and animated transitions</li>
+                    <li>Interactive elements with JavaScript and GSAP</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Replicating the exact look and feel of Apple's website was challenging due to its complexity and attention to detail. This was tackled by meticulously analyzing the original site and using advanced CSS techniques for layout and animations.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/apple-website-clone" target="_blank">GitHub Repo →</a>
+                    <a href="https://clonewebs2.netlify.app/" target="_blank">Live Demo →</a>
                   </div>
                 </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/apple-website-clone', '_blank')">
+                  <span>→</span>
+                </button>
               </div>
             </div>
 
             <div class="projects-item" data-category="web">
               <div class="projects-item__img">
-                <img src="images\projects\youtube.jpeg" alt="YouTube Clone" />
+                <img src="images/projects/youtube.jpeg" alt="YouTube Clone" loading="lazy" />
               </div>
               <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>009</p>
-                  <h3>YouTube Clone</h3>
-                </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">github • live demo</span>
-                  <div class="project-buttons">
-                    <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/youtube-clone', '_blank')" title="View on GitHub">
-                      <span>→</span>
-                    </button>
-                    <button class="project-btn live-btn" onclick="window.open('https://youtubecloneharshgidwani.netlify.app/', '_blank')" title="View Live Demo">
-                      <span>↗</span>
-                    </button>
+                <p>009</p>
+                <h3>YouTube Clone</h3>
+                <div class="project-tagline">React, YouTube API, CSS</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>Functional YouTube clone with video streaming and search.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project involved building a YouTube clone that allows users to search and watch videos, featuring a responsive design and integration with the YouTube API for real video content.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">YouTube API</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Video search and playback functionality</li>
+                    <li>Responsive design for mobile and desktop</li>
+                    <li>Integration with YouTube API for real-time data</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Integrating the YouTube API and ensuring smooth video playback were the main challenges. These were addressed by thorough testing and optimization of API calls and video player settings.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/youtube-clone" target="_blank">GitHub Repo →</a>
+                    <a href="https://youtubecloneharshgidwani.netlify.app/" target="_blank">Live Demo →</a>
                   </div>
                 </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/youtube-clone', '_blank')">
+                  <span>→</span>
+                </button>
               </div>
             </div>
 
             <div class="projects-item" data-category="ai-ml">
               <div class="projects-item__img">
-                <img src="images\projects\sentiment.png" alt="IMDB Sentiment Analysis" />
+                <img src="images/projects/sentiment.png" alt="IMDB Sentiment Analysis" loading="lazy" />
               </div>
               <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>010</p>
-                  <h3>IMDB Sentiment Analysis</h3>
-                </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">github</span>
-                  <div class="project-buttons">
-                    <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/IMDB-sentiment-analysis', '_blank')" title="View on GitHub">
-                      <span>→</span>
-                    </button>
+                <p>010</p>
+                <h3>IMDB Sentiment Analysis</h3>
+                <div class="project-tagline">NLP, Sentiment Analysis, ML</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>Sentiment analysis on IMDB movie reviews using ML models.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project focuses on analyzing movie reviews from IMDB to determine the sentiment (positive, negative, neutral) using machine learning models, providing insights into public opinion on movies.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Scikit-learn</span>
+                    <span class="tech-tag">NLTK</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">Matplotlib</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Text preprocessing and feature extraction</li>
+                    <li>Model training and evaluation (SVM, Random Forest, etc.)</li>
+                    <li>Sentiment prediction and visualization</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Challenges included handling imbalanced data, selecting appropriate features for sentiment analysis, and optimizing model performance. These were addressed through careful data preprocessing, feature engineering, and model tuning.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/IMDB-sentiment-analysis" target="_blank">GitHub Repo →</a>
                   </div>
                 </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/IMDB-sentiment-analysis', '_blank')">
+                  <span>→</span>
+                </button>
               </div>
             </div>
 
             <div class="projects-item" data-category="ai-ml">
               <div class="projects-item__img">
-                <img src="images\projects\FyLlcX-aQAIJ_EN.png" alt="Next Word Predictor" />
+                <img src="images/projects/FyLlcX-aQAIJ_EN.png" alt="Next Word Predictor" loading="lazy" />
               </div>
               <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>011</p>
-                  <h3>Next Word Predictor</h3>
-                </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">github</span>
-                  <div class="project-buttons">
-                    <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/Next-word-prediction', '_blank')" title="View on GitHub">
-                      <span>→</span>
-                    </button>
+                <p>011</p>
+                <h3>Next Word Predictor</h3>
+                <div class="project-tagline">NLP, LSTM, Deep Learning</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>LSTM-based model for predicting next words in sequences.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project involves building a predictive text model that suggests the next word in a sentence based on the context provided by the previous words, using LSTM (Long Short-Term Memory) networks.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Keras</span>
+                    <span class="tech-tag">NLTK</span>
+                    <span class="tech-tag">Pandas</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Trained on large text corpora for diverse language understanding</li>
+                    <li>Predicts next word with high accuracy</li>
+                    <li>Can be integrated into chatbots and writing assistants</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Key challenges included training the LSTM model for optimal performance and ensuring it could generalize well to new, unseen text. These were addressed by using dropout layers to prevent overfitting and by carefully tuning the model hyperparameters.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/Next-word-prediction" target="_blank">GitHub Repo →</a>
                   </div>
                 </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/Next-word-prediction', '_blank')">
+                  <span>→</span>
+                </button>
               </div>
             </div>
 
             <div class="projects-item" data-category="ai-ml">
               <div class="projects-item__img">
-                <img src="images\projects\0_KOpmpTSoSrxgMQAV.png" alt="LLM Core Pipeline" />
+                <img src="images/projects/0_KOpmpTSoSrxgMQAV.png" alt="LLM Core Pipeline" loading="lazy" />
               </div>
               <div class="projects-item__content">
-                <div class="projects-item__text">
-                  <p>012</p>
-                  <h3>LLM Core Pipeline</h3>
-                </div>
-                <div class="project-btn-container">
-                  <span class="project-btn-hint">github</span>
-                  <div class="project-buttons">
-                    <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/llm-core-pipeline', '_blank')" title="View on GitHub">
-                      <span>→</span>
-                    </button>
+                <p>012</p>
+                <h3>LLM Core Pipeline</h3>
+                <div class="project-tagline">LLM, Pipeline, Python</div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p>Core pipeline implementation for LLM processing and training.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project focuses on building a robust pipeline for processing and training Large Language Models (LLMs), ensuring efficient data handling, model training, and evaluation.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">NumPy</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>End-to-end pipeline from data preprocessing to model training</li>
+                    <li>Supports multiple LLM architectures</li>
+                    <li>Integration with TensorFlow for scalable training</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Ensuring the pipeline's flexibility and scalability to accommodate different LLMs and large datasets was a key challenge. This was addressed by designing modular pipeline components and optimizing data flow and model training processes.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/llm-core-pipeline" target="_blank">GitHub Repo →</a>
                   </div>
                 </div>
+                <button class="project-btn" onclick="window.open('https://github.com/harsh-codess/llm-core-pipeline', '_blank')">
+                  <span>→</span>
+                </button>
               </div>
             </div>
           </div>
@@ -534,6 +964,42 @@
     </div>
 
     <script>
+      // Lazy loading observer
+      const images = document.querySelectorAll('img[loading="lazy"]');
+      
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.classList.add('loaded');
+              observer.unobserve(img);
+            }
+          });
+        });
+        
+        images.forEach(img => imageObserver.observe(img));
+      }
+
+      // SEO structured data
+      document.addEventListener('DOMContentLoaded', function() {
+        const structuredData = {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "All Projects - Harsh Gidwani",
+          "description": "Complete portfolio of AI, ML, and web development projects",
+          "author": {
+            "@type": "Person",
+            "name": "Harsh Gidwani"
+          }
+        };
+        
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(structuredData);
+        document.head.appendChild(script);
+      });
+
       // Filter functionality
       const filterBtns = document.querySelectorAll('.filter-btn');
       const projectItems = document.querySelectorAll('.projects-item');
@@ -557,7 +1023,24 @@
         });
       });
 
-      // Smooth scrolling and GSAP animations (if you want to include them)
+      // Project toggle functionality (accordion)
+      document.querySelectorAll('.project-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const details = this.nextElementSibling;
+          const expanded = this.getAttribute('aria-expanded') === 'true';
+          if (expanded) {
+            details.hidden = true;
+            this.setAttribute('aria-expanded', 'false');
+            this.textContent = 'Read more ↓';
+          } else {
+            details.hidden = false;
+            this.setAttribute('aria-expanded', 'true');
+            this.textContent = 'Show less ↑';
+          }
+        });
+      });
+
+      // GSAP animations
       if (typeof gsap !== 'undefined') {
         gsap.from('.projects-item', {
           duration: 0.8,

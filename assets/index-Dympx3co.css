@@ -322,30 +322,75 @@ body a{
     width:1.5em
 }
 
-/* Hero CTA Button - Updated for single button */
+/* Enhanced Hero CTA Buttons - Fixed to match design */
 .hero__cta {
     margin-top: 1.5rem;
     margin-bottom: 1rem;
     display: flex;
+    gap: 1rem;
     justify-content: flex-start;
+    align-items: center;
 }
 
+.hero__about-btn,
 .hero__projects-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.8em;
-    padding: 0.8rem 1.6rem;
+    padding: 0.7rem 1.4rem;
     border-radius: 50px;
     font-size: 0.9em;
-    font-weight: 400;
+    font-weight: 500;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
     backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+}
+
+/* About Me Button - Primary light button */
+.hero__about-btn {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.95);
+    color: #191919;
+}
+
+.hero__about-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+    background: #fff;
+}
+
+.hero__about-btn:hover::before {
+    left: 0;
+}
+
+.hero__about-btn:hover {
+    color: #191919;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+    border-color: #fff;
+}
+
+.hero__about-btn img {
+    filter: brightness(0);
+    width: 1em;
+    height: 1em;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Projects Button - Secondary dark button */
+.hero__projects-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
 }
 
 .hero__projects-btn::before {
@@ -365,13 +410,10 @@ body a{
 }
 
 .hero__projects-btn:hover {
-    border-color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.7);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-.hero__projects-btn:hover img {
-    transform: translateX(4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    color: #fff;
 }
 
 .hero__projects-btn img {
@@ -381,41 +423,52 @@ body a{
     filter: brightness(0) invert(1);
 }
 
+.hero__about-btn:hover img,
+.hero__projects-btn:hover img {
+    transform: translateX(4px);
+}
+
 @media (max-width: 1024px) {
     .hero__cta {
         justify-content: center;
         margin-top: 1.2rem;
         margin-bottom: 0.8rem;
+        flex-wrap: wrap;
     }
 }
 
 @media (max-width: 768px) {
+    .hero__about-btn,
     .hero__projects-btn {
-        padding: 0.7rem 1.4rem;
+        padding: 0.6rem 1.2rem;
         font-size: 0.85em;
     }
     
     .hero__cta {
         margin-top: 1rem;
         margin-bottom: 0.5rem;
+        gap: 0.8rem;
     }
 }
 
 @media (max-width: 480px) {
     .hero__cta {
+        flex-direction: column;
         align-items: center;
         margin-top: 0.8rem;
         margin-bottom: 0.4rem;
+        gap: 0.6rem;
     }
     
+    .hero__about-btn,
     .hero__projects-btn {
-        max-width: 200px;
+        width: 100%;
+        max-width: 220px;
         justify-content: center;
-        padding: 0.6rem 1.2rem;
+        padding: 0.55rem 1.1rem;
         font-size: 0.8em;
     }
 }
-
 .hero__bottom{
     height:100px;
     display:-webkit-box;
@@ -436,7 +489,7 @@ body a{
     width: 100%;
 }
 
-/* Resume Download Section - Updated to match green theme */
+/* Resume Download Section - Updated with dual buttons */
 .resume-download-wrapper {
     margin-top: clamp(3rem, 2.5rem + 2vw, 4rem);
     margin-bottom: clamp(1rem, 0.5rem + 1vw, 2rem);
@@ -492,13 +545,18 @@ body a{
     max-width: 500px;
 }
 
-.resume-download-btn {
+.resume-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.resume-download-btn,
+.about-me-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.8em;
     padding: 1rem 2rem;
-    background: #191919;
-    border: 2px solid #191919;
     border-radius: 50px;
     color: #fff;
     font-size: 1rem;
@@ -508,21 +566,42 @@ body a{
     position: relative;
     overflow: hidden;
     white-space: nowrap;
+    border: 2px solid transparent;
 }
 
-.resume-download-btn::before {
+.resume-download-btn {
+    background: #191919;
+    border-color: #191919;
+}
+
+.about-me-btn {
+    background: transparent;
+    border-color: #191919;
+    color: #191919;
+}
+
+.resume-download-btn::before,
+.about-me-btn::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: #000;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
 }
 
-.resume-download-btn:hover::before {
+.resume-download-btn::before {
+    background: #000;
+}
+
+.about-me-btn::before {
+    background: #191919;
+}
+
+.resume-download-btn:hover::before,
+.about-me-btn:hover::before {
     left: 0;
 }
 
@@ -532,52 +611,53 @@ body a{
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.resume-download-btn:hover svg {
+.about-me-btn:hover {
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.resume-download-btn:hover svg,
+.about-me-btn:hover svg {
     transform: translateY(2px);
 }
 
-.resume-download-btn svg {
+.resume-download-btn svg,
+.about-me-btn svg {
     width: 1.1em;
     height: 1.1em;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.resume-download-btn:focus-visible {
+.resume-download-btn:focus-visible,
+.about-me-btn:focus-visible {
     outline: 3px solid #000;
     outline-offset: 3px;
 }
 
-/* Mobile-specific updates for green theme */
+/* Mobile responsive updates */
 @media (max-width: 768px) {
     .resume-download-container {
         flex-direction: column;
         text-align: center;
         padding: 2rem 1.5rem;
         gap: 1.5rem;
-        background: #87b37a;
-        border: 1px solid rgba(0, 0, 0, 0.15);
     }
     
-    .resume-download-subtitle {
-        max-width: none;
+    .resume-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;
     }
     
-    .resume-download-btn {
+    .resume-download-btn,
+    .about-me-btn,
+    .about-me-btn-primary {
         padding: 0.9rem 1.8rem;
         font-size: 0.95rem;
         width: 100%;
         max-width: 280px;
         justify-content: center;
-        background: #191919;
-        border-color: #191919;
-    }
-    
-    .resume-download-btn::before {
-        background: #000;
-    }
-    
-    .resume-download-btn:hover {
-        border-color: #000;
     }
 }
 
@@ -585,33 +665,14 @@ body a{
     .resume-download-container {
         padding: 1.5rem 1rem;
         gap: 1.2rem;
-        background: #87b37a;
     }
     
-    .resume-download-btn {
+    .resume-download-btn,
+    .about-me-btn,
+    .about-me-btn-primary {
         padding: 0.8rem 1.6rem;
         font-size: 0.9em;
         max-width: 260px;
-        background: #191919;
-        border-color: #191919;
-    }
-    
-    .resume-download-btn::before {
-        background: #000;
-    }
-    
-    .resume-download-btn:hover {
-        border-color: #000;
-    }
-    
-    .resume-download-title {
-        font-size: 1.3rem;
-        color: #000;
-    }
-    
-    .resume-download-subtitle {
-        font-size: 0.95rem;
-        color: #000;
     }
 }
 .about{
@@ -1668,5 +1729,71 @@ body a{
 
 .stagger-animation {
     animation-delay: var(--delay);
+}
+
+/* Enhanced About Me Button in Resume Section */
+.about-me-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8em;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 2px solid #fff;
+    background: transparent;
+}
+
+.about-me-btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+    background: #fff;
+}
+
+.about-me-btn-primary:hover::before {
+    left: 0;
+}
+
+.about-me-btn_primary:hover {
+    color: #87b37a;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+.about-me-btn-primary:hover svg {
+    transform: translateY(2px);
+}
+
+.about-me-btn-primary svg {
+    width: 1.1em;
+    height: 1.1em;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Contact Section About Me Link */
+.contact-about {
+    margin-top: 0.5rem;
+    opacity: 0.9;
+}
+
+.contact-about:hover {
+    opacity: 1;
+}
+
+.contact-about a {
+    font-style: italic;
+    text-transform: lowercase;
 }
 

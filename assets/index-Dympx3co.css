@@ -322,9 +322,10 @@ body a{
     width:1.5em
 }
 
-/* Hero CTA Button */
+/* Hero CTA Button - Updated for single button */
 .hero__cta {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: flex-start;
 }
@@ -334,17 +335,17 @@ body a{
     align-items: center;
     gap: 0.8em;
     padding: 0.8rem 1.6rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 50px;
-    color: #fff;
     font-size: 0.9em;
     font-weight: 400;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    backdrop-filter: blur(10px);
 }
 
 .hero__projects-btn::before {
@@ -354,9 +355,9 @@ body a{
     left: -100%;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2);
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .hero__projects-btn:hover::before {
@@ -383,7 +384,8 @@ body a{
 @media (max-width: 1024px) {
     .hero__cta {
         justify-content: center;
-        margin-top: 1.5rem;
+        margin-top: 1.2rem;
+        margin-bottom: 0.8rem;
     }
 }
 
@@ -392,18 +394,28 @@ body a{
         padding: 0.7rem 1.4rem;
         font-size: 0.85em;
     }
+    
+    .hero__cta {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
 }
 
-/* Navigation Projects Link */
-.menu-nav__projects {
-    color: #87b37a !important;
-    font-weight: 500 !important;
-    opacity: 1 !important;
+@media (max-width: 480px) {
+    .hero__cta {
+        align-items: center;
+        margin-top: 0.8rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .hero__projects-btn {
+        max-width: 200px;
+        justify-content: center;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8em;
+    }
 }
 
-.menu-nav__projects:hover {
-    color: #fff !important;
-}
 .hero__bottom{
     height:100px;
     display:-webkit-box;
@@ -415,28 +427,192 @@ body a{
     -webkit-box-align:center;
     -ms-flex-align:center;
     align-items:center;
-    padding-top:72px;
+    padding-top:50px;
     -webkit-column-gap:.2em;
     -moz-column-gap:.2em;
-    column-gap:.2em
+    column-gap:.2em;
+    margin-top: auto;
+    text-align: center;
+    width: 100%;
 }
-.hero__arrow{
-    width:.6em;
-    height:.6em
+
+/* Resume Download Section - Updated to match green theme */
+.resume-download-wrapper {
+    margin-top: clamp(3rem, 2.5rem + 2vw, 4rem);
+    margin-bottom: clamp(1rem, 0.5rem + 1vw, 2rem);
 }
-.hero__img{
-    position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    height:100%;
-    width:100%;
-    -o-object-fit:cover;
-    object-fit:cover;
-    -o-object-position:right;
-    object-position:right;
-    z-index:1
+
+.resume-download-container {
+    background: #87b37a;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.resume-download-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #191919, #4f4f4f, #191919);
+    background-size: 200% 100%;
+    animation: resume-gradient 4s ease-in-out infinite;
+}
+
+@keyframes resume-gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.resume-download-content {
+    flex: 1;
+}
+
+.resume-download-title {
+    font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.8rem);
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.resume-download-subtitle {
+    font-size: 1rem;
+    color: #000;
+    opacity: 0.8;
+    line-height: 1.5;
+    max-width: 500px;
+}
+
+.resume-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8em;
+    padding: 1rem 2rem;
+    background: #191919;
+    border: 2px solid #191919;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.resume-download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.resume-download-btn:hover::before {
+    left: 0;
+}
+
+.resume-download-btn:hover {
+    border-color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.resume-download-btn:hover svg {
+    transform: translateY(2px);
+}
+
+.resume-download-btn svg {
+    width: 1.1em;
+    height: 1.1em;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.resume-download-btn:focus-visible {
+    outline: 3px solid #000;
+    outline-offset: 3px;
+}
+
+/* Mobile-specific updates for green theme */
+@media (max-width: 768px) {
+    .resume-download-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+        background: #87b37a;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    
+    .resume-download-subtitle {
+        max-width: none;
+    }
+    
+    .resume-download-btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 0.95rem;
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+        background: #191919;
+        border-color: #191919;
+    }
+    
+    .resume-download-btn::before {
+        background: #000;
+    }
+    
+    .resume-download-btn:hover {
+        border-color: #000;
+    }
+}
+
+@media (max-width: 480px) {
+    .resume-download-container {
+        padding: 1.5rem 1rem;
+        gap: 1.2rem;
+        background: #87b37a;
+    }
+    
+    .resume-download-btn {
+        padding: 0.8rem 1.6rem;
+        font-size: 0.9em;
+        max-width: 260px;
+        background: #191919;
+        border-color: #191919;
+    }
+    
+    .resume-download-btn::before {
+        background: #000;
+    }
+    
+    .resume-download-btn:hover {
+        border-color: #000;
+    }
+    
+    .resume-download-title {
+        font-size: 1.3rem;
+        color: #000;
+    }
+    
+    .resume-download-subtitle {
+        font-size: 0.95rem;
+        color: #000;
+    }
 }
 .about{
     background-color:#87b37a

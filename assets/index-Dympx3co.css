@@ -751,7 +751,58 @@ body a{
     background-color:#fff
 }
 
+/* Override existing projects styles for card layout */
+.projects-container {
+    display: none; /* Hide old container */
+}
 
+/* Remove old project item styles that conflict */
+
+/* Keep the projects section background */
+.projects {
+    background-color: #fff;
+}
+
+/* Enhanced JavaScript toggle functionality for cards - Fixed */
+.project-details[aria-expanded="true"] {
+    max-height: none; /* Changed from fixed 200px to none */
+    padding: 1.2rem;
+}
+
+.project-details[aria-expanded="false"] {
+    max-height: 0;
+    padding: 0 1.2rem;
+}
+
+/* Improved accessibility for card layout */
+.project-card:focus-within {
+    outline: 2px solid #87b37a;
+    outline-offset: 2px;
+}
+
+/* Animation enhancements */
+.project-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger animation for cards */
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
 
 .projects-container{
     margin-top:clamp(3rem,2.318rem + 3.41vw,4.5rem);
@@ -859,13 +910,13 @@ body a{
     width: 100%;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother easing */
-    transform: translateZ(0); /* Force hardware acceleration */
-    will-change: max-height, padding; /* Optimize for animations */
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
+    will-change: max-height, padding;
 }
 
 .project-details:not([hidden]) {
-    max-height: 300px; /* Reduced from 500px for better control */
+    max-height: 800px; /* Increased from 300px to accommodate larger content */
     padding: 1em;
 }
 
@@ -1084,7 +1135,7 @@ body a{
 }
 
 .project-details:not([hidden]) {
-    max-height: 500px; /* Enough space for content */
+    max-height: 800px; /* Increased from 300px to accommodate larger content */
     padding: 1em; /* Apply padding when expanded */
 }
 
@@ -1796,4 +1847,7 @@ body a{
     font-style: italic;
     text-transform: lowercase;
 }
+
+/* Remove duplicate project card color definitions if they exist */
+/* The solid dark colors are now defined in the HTML file */
 

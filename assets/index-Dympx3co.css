@@ -1848,6 +1848,84 @@ body a{
     text-transform: lowercase;
 }
 
-/* Remove duplicate project card color definitions if they exist */
-/* The solid dark colors are now defined in the HTML file */
+/* Color Variants for Cards - Add these to ensure proper dark colors */
+.project-card--navy {
+    background: #1A237E; /* Dark navy */
+    color: #ffffff;
+}
+
+.project-card--maroon {
+    background: #6D2C91; /* Dark maroon */
+    color: #ffffff;
+}
+
+.project-card--olive {
+    background: #556B2F; /* Dark olive */
+    color: #ffffff;
+}
+
+.project-card--slate {
+    background: #455A64; /* Dark slate */
+    color: #ffffff;
+}
+
+.project-card--crimson {
+    background: #DC143C; /* Crimson red */
+    color: #ffffff;
+}
+
+.project-card--charcoal {
+    background: #2C2C2C; /* Dark charcoal */
+    color: #ffffff;
+}
+
+/* Fix the project details strong text color for dark cards */
+.project-details strong {
+    color: #ffffff; /* Changed back to white for better contrast on dark cards */
+    font-weight: 600;
+}
+
+.project-details h4 {
+    margin: 1em 0 0.5em;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.project-details .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin: 0.7em 0;
+}
+
+.project-details .tech-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.2em 0.7em;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.project-links {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.project-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.project-links a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
 

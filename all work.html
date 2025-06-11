@@ -141,6 +141,7 @@
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
         gap: 1.5rem;
         margin: 3rem 0;
+        align-items: stretch; /* Make all cards same height */
       }
 
       /* Project Card - From index.html CSS with Color Variants */
@@ -150,9 +151,11 @@
         overflow: hidden;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         border: 1px solid rgba(255, 255, 255, 0.2);
-        height: fit-content;
+        height: 100%; /* Force all cards to same height */
         position: relative;
         padding: 0;
+        display: flex; /* Make card a flex container */
+        flex-direction: column; /* Stack content vertically */
       }
 
       /* Color Variants for Cards - From index.html CSS */
@@ -227,6 +230,8 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        flex: 1; /* Take up available space */
+        min-height: 0; /* Allow flex shrinking */
       }
 
       .project-card__title {
@@ -237,6 +242,7 @@
         line-height: 1.2;
         letter-spacing: -0.02em;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        flex-shrink: 0; /* Don't shrink title */
       }
 
       /* Project Description - From index.html CSS */
@@ -246,7 +252,14 @@
         margin: 0.5rem 0 1rem 0;
         font-size: 1rem;
         max-width: none;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);        flex-shrink: 0; /* Don't shrink description */
+        /* Clamp description to consistent height */
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 4.8rem; /* Consistent height for 3 lines */
       }
 
       /* Project Tags - From index.html CSS */
@@ -256,6 +269,9 @@
         gap: 0.5rem;
         margin: 1rem 0;
         order: 2;
+        flex-shrink: 0; /* Don't shrink tags */
+        min-height: 2.5rem; /* Consistent minimum height for tags */
+        align-content: flex-start; /* Align tags to top */
       }
 
       .project-tag {
@@ -292,6 +308,7 @@
         transition: color 0.2s ease;
         order: 3;
         margin: 0.5rem 0;
+        flex-shrink: 0; /* Don't shrink button */
       }
 
       .project-toggle-btn:hover {
@@ -314,6 +331,7 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
         order: 4;
         backdrop-filter: blur(10px);
+        flex-shrink: 0; /* Don't shrink details */
       }
 
       .project-details:not([hidden]) {
@@ -389,9 +407,13 @@
 
       /* Project Actions - From index.html CSS */
       .project-card__actions {
-        margin-top: auto;
+        margin-top: auto; /* Push to bottom */
         padding-top: 0.5rem;
         order: 5;
+        flex-shrink: 0; /* Don't shrink actions */
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
       }
 
       .project-btn-primary {
@@ -412,6 +434,30 @@
         overflow: hidden;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        flex: 1;
+        min-width: 140px;
+      }
+
+      .project-btn-secondary {
+        background: transparent;
+        color: #ffffff;
+        padding: 0.9rem 1.8rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #ffffff;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        flex: 1;
+        min-width: 140px;
       }
 
       .project-btn-primary::before {
@@ -426,11 +472,25 @@
         z-index: -1;
       }
 
-      .project-btn-primary:hover::before {
+      .project-btn-secondary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        transition: left 0.3s ease;
+        z-index: -1;
+      }
+
+      .project-btn-primary:hover::before,
+      .project-btn-secondary:hover::before {
         left: 0;
       }
 
-      .project-btn-primary:hover {
+      .project-btn-primary:hover,
+      .project-btn-secondary:hover {
         color: #000000;
         transform: translateY(-2px);
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
@@ -485,6 +545,7 @@
         .projects-grid {
           grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
           gap: 1.5rem;
+          align-items: stretch; /* Maintain same height */
         }
       }
 
@@ -526,14 +587,19 @@
           grid-template-columns: 1fr;
           gap: 1.2rem;
           margin: 2rem 0;
+          align-items: stretch; /* Maintain same height on mobile */
         }
         
         .project-card__content {
           padding: 2rem 1.5rem;
         }
         
-        .project-card__title {
-          font-size: clamp(1.6rem, 1.3rem + 1vw, 1.9rem);
+        .project-card__description {
+          min-height: 4.5rem; /* Slightly smaller on mobile */
+        }
+        
+        .project-card__tags {
+          min-height: 2.2rem; /* Slightly smaller on mobile */
         }
 
         .project-btn-primary {
@@ -581,12 +647,22 @@
         .projects-grid {
           gap: 1rem;
           margin: 1.5rem 0;
+          align-items: stretch; /* Maintain same height */
         }
         
         .project-card__content {
           padding: 1.5rem 1.2rem;
         }
         
+        .project-card__description {
+          min-height: 4.2rem; /* Adjust for smaller screens */
+          font-size: 0.95rem;
+        }
+        
+        .project-card__tags {
+          min-height: 2rem; /* Adjust for smaller screens */
+        }
+
         .project-btn-primary {
           padding: 0.7rem 1.4rem;
           font-size: 0.8rem;
@@ -633,10 +709,16 @@
           padding: 1.2rem 0.8rem;
         }
         
-        .project-btn-primary {
-          font-size: 0.75rem;
-          padding: 0.6rem 1.2rem;
+        .project-card__description {
+          min-height: 4rem; /* Adjust for very small screens */
+          font-size: 0.9rem;
         }
+        
+        .project-card__tags {
+          min-height: 1.8rem; /* Adjust for very small screens */
+        }
+
+        /* ...existing styles... */
       }
 
       /* Improved header responsive */
@@ -1063,12 +1145,12 @@
               </div>
             </div>
 
-            <!-- Apple Website Clone Card -->
+            <!-- Apple Website Clone Card - Updated to focus on frontend only -->
             <div class="project-card project-card--charcoal" data-category="web">
               <div class="project-card__content">
                 <h3 class="project-card__title">Apple Website Clone</h3>
                 <div class="project-card__description">
-                  Pixel-perfect clone of Apple's website with animations.
+                  Pixel-perfect frontend recreation of Apple's website with smooth animations and responsive design using pure HTML, CSS, and JavaScript.
                 </div>
                 <div class="project-card__tags">
                   <span class="project-tag">HTML</span>
@@ -1078,86 +1160,100 @@
                 </div>
                 <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
                 <div class="project-details" hidden>
-                  <p><strong>Why This Project:</strong> Developed to challenge my front-end skills by replicating a complex, high-fidelity design and implementing smooth animations and responsive layouts.</p>
+                  <p><strong>Why This Project:</strong> Developed to master advanced frontend techniques by replicating one of the most sophisticated and visually appealing websites, focusing on animations, responsive design, and user experience.</p>
                   
                   <h4>Project Overview</h4>
-                  <p>This project involved recreating Apple's website homepage with high fidelity, focusing on responsive design and smooth animations to mimic the original site.</p>
+                  <p>This frontend project recreates Apple's homepage with meticulous attention to detail, implementing smooth scrolling animations, responsive layouts, and interactive elements using modern web technologies without any backend dependencies.</p>
                   
                   <h4>Technical Implementation</h4>
                   <div class="tech-stack">
-                    <span class="tech-tag">HTML</span>
-                    <span class="tech-tag">CSS</span>
-                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">Vanilla JavaScript</span>
                     <span class="tech-tag">GSAP</span>
+                    <span class="tech-tag">Responsive Design</span>
                   </div>
                   
                   <h4>Key Features</h4>
                   <ul>
-                    <li>Responsive layout adapting to various screen sizes</li>
-                    <li>Smooth scrolling and animated transitions</li>
-                    <li>Interactive elements with JavaScript and GSAP</li>
+                    <li>Pixel-perfect responsive design across all devices</li>
+                    <li>Smooth scroll animations and transitions using GSAP</li>
+                    <li>Interactive product showcases and hover effects</li>
+                    <li>Optimized performance with lazy loading</li>
+                    <li>Cross-browser compatibility and accessibility</li>
                   </ul>
                   
                   <h4>Challenges & Solutions</h4>
-                  <p>Replicating the exact look and feel of Apple's website was challenging due to its complexity and attention to detail. This was tackled by meticulously analyzing the original site and using advanced CSS techniques for layout and animations.</p>
+                  <p>Replicating Apple's sophisticated visual effects and ensuring smooth performance across devices were major challenges. These were solved through advanced CSS techniques, optimized JavaScript animations, and careful performance profiling to maintain 60fps animations.</p>
                   
                   <div class="project-links">
                     <a href="https://github.com/harsh-codess/apple-website-clone" target="_blank">GitHub Repo →</a>
                     <a href="https://clonewebs2.netlify.app/" target="_blank">Live Demo →</a>
                   </div>
                 </div>
-                <div class="project-card__actions">                  <a href="https://github.com/harsh-codess/apple-website-clone" class="project-btn-primary">
-                    View Project
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/apple-website-clone" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://clonewebs2.netlify.app/" class="project-btn-primary" target="_blank">
+                    Live Demo
                   </a>
                 </div>
               </div>
             </div>
 
-            <!-- YouTube Clone Card -->
+            <!-- YouTube Clone Card - Updated to focus on frontend only -->
             <div class="project-card project-card--crimson" data-category="web">
               <div class="project-card__content">
                 <h3 class="project-card__title">YouTube Clone</h3>
                 <div class="project-card__description">
-                  Functional YouTube clone with video streaming and search.
+                  Frontend recreation of YouTube's interface with video streaming capabilities, search functionality, and responsive design using React and YouTube API.
                 </div>
                 <div class="project-card__tags">
                   <span class="project-tag">React</span>
                   <span class="project-tag">YouTube API</span>
-                  <span class="project-tag">CSS</span>
+                  <span class="project-tag">CSS3</span>
                   <span class="project-tag">JavaScript</span>
                 </div>
                 <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
                 <div class="project-details" hidden>
-                  <p><strong>Why This Project:</strong> Built to deepen my understanding of React and API integration by developing a full-stack application with real-time data fetching and dynamic content rendering.</p>
+                  <p><strong>Why This Project:</strong> Built to demonstrate proficiency in React development and API integration by recreating one of the world's most popular video platforms with modern frontend technologies.</p>
                   
                   <h4>Project Overview</h4>
-                  <p>This project involved building a YouTube clone that allows users to search and watch videos, featuring a responsive design and integration with the YouTube API for real video content.</p>
+                  <p>This frontend application recreates YouTube's core interface and functionality using React, featuring video search, playback, and responsive design while integrating with YouTube's official API for real video content.</p>
                   
                   <h4>Technical Implementation</h4>
                   <div class="tech-stack">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">YouTube API</span>
-                    <span class="tech-tag">CSS</span>
-                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">React.js</span>
+                    <span class="tech-tag">YouTube Data API</span>
+                    <span class="tech-tag">CSS Modules</span>
+                    <span class="tech-tag">React Hooks</span>
+                    <span class="tech-tag">Responsive Design</span>
                   </div>
                   
                   <h4>Key Features</h4>
                   <ul>
-                    <li>Video search and playback functionality</li>
-                    <li>Responsive design for mobile and desktop</li>
-                    <li>Integration with YouTube API for real-time data</li>
+                    <li>Real-time video search with YouTube API integration</li>
+                    <li>Responsive video player with custom controls</li>
+                    <li>Dynamic video recommendations and suggestions</li>
+                    <li>Mobile-first responsive design</li>
+                    <li>Component-based architecture for scalability</li>
                   </ul>
                   
                   <h4>Challenges & Solutions</h4>
-                  <p>Integrating the YouTube API and ensuring smooth video playback were the main challenges. These were addressed by thorough testing and optimization of API calls and video player settings.</p>
+                  <p>Managing API rate limits, implementing smooth video playback, and creating a responsive layout that works across all devices were key challenges. Solutions included efficient API call optimization, custom video player implementation, and flexible CSS Grid/Flexbox layouts.</p>
                   
                   <div class="project-links">
                     <a href="https://github.com/harsh-codess/youtube-clone" target="_blank">GitHub Repo →</a>
                     <a href="https://youtubecloneharshgidwani.netlify.app/" target="_blank">Live Demo →</a>
                   </div>
                 </div>
-                <div class="project-card__actions">                  <a href="https://github.com/harsh-codess/youtube-clone" class="project-btn-primary">
-                    View Project
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/youtube-clone" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://youtubecloneharshgidwani.netlify.app/" class="project-btn-primary" target="_blank">
+                    Live Demo
                   </a>
                 </div>
               </div>
@@ -1168,19 +1264,19 @@
               <div class="project-card__content">
                 <h3 class="project-card__title">IMDB Sentiment Analysis</h3>
                 <div class="project-card__description">
-                  Sentiment analysis on IMDB movie reviews using ML models.
+                  Analyzes IMDB movie reviews to predict sentiment (positive/negative) using NLP and machine learning.
                 </div>
                 <div class="project-card__tags">
                   <span class="project-tag">NLP</span>
                   <span class="project-tag">Sentiment Analysis</span>
-                  <span class="project-tag">ML</span>
+                  <span class="project-tag">Python</span>
                 </div>
                 <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
                 <div class="project-details" hidden>
-                  <p><strong>Why This Project:</strong> Developed to analyze public sentiment on movies and provide insights into audience perceptions using natural language processing and machine learning techniques.</p>
+                  <p><strong>Why This Project:</strong> Developed to explore sentiment analysis techniques and their application in understanding public opinion and improving movie recommendation systems.</p>
                   
                   <h4>Project Overview</h4>
-                  <p>This project focuses on analyzing movie reviews from IMDB to determine the sentiment (positive, negative, neutral) using machine learning models, providing insights into public opinion on movies.</p>
+                  <p>This project implements a sentiment analysis pipeline that processes IMDB movie reviews, extracting features and training models to predict sentiment polarity.</p>
                   
                   <h4>Technical Implementation</h4>
                   <div class="tech-stack">
@@ -1188,23 +1284,26 @@
                     <span class="tech-tag">NLTK</span>
                     <span class="tech-tag">Pandas</span>
                     <span class="tech-tag">Matplotlib</span>
+                    <span class="tech-tag">Seaborn</span>
                   </div>
                   
                   <h4>Key Features</h4>
-                  <ul>
+                                   <ul>
                     <li>Text preprocessing and feature extraction</li>
-                    <li>Model training and evaluation (SVM, Random Forest, etc.)</li>
-                    <li>Sentiment prediction and visualization</li>
+                    <li>Model training and evaluation (SVM, Naive Bayes, LSTM)</li>
+                    <li>Sentiment score visualization</li>
+                    <li>Integration with Flask for web demo</li>
                   </ul>
                   
                   <h4>Challenges & Solutions</h4>
-                  <p>Challenges included handling imbalanced data, selecting appropriate features for sentiment analysis, and optimizing model performance. These were addressed through careful data preprocessing, feature engineering, and model tuning.</p>
+                  <p>Challenges included handling imbalanced data, selecting appropriate features, and tuning model hyperparameters for optimal performance. These were addressed through careful data preprocessing, feature engineering, and extensive model evaluation.</p>
                   
                   <div class="project-links">
-                    <a href="https://github.com/harsh-codess/IMDB-sentiment-analysis" target="_blank">GitHub Repo →</a>
+                    <a href="https://github.com/harsh-codess/IMDB-Sentiment-Analysis" target="_blank">GitHub Repo →</a>
                   </div>
                 </div>
-                <div class="project-card__actions">                  <a href="https://github.com/harsh-codess/IMDB-sentiment-analysis" class="project-btn-primary">
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/IMDB-Sentiment-Analysis" class="project-btn-primary">
                     View Project
                   </a>
                 </div>
@@ -1216,19 +1315,19 @@
               <div class="project-card__content">
                 <h3 class="project-card__title">Next Word Predictor</h3>
                 <div class="project-card__description">
-                  LSTM-based model for predicting next words in sequences.
+                  Predicts the next word in a sentence using advanced NLP models to assist in writing and content creation.
                 </div>
                 <div class="project-card__tags">
                   <span class="project-tag">NLP</span>
-                  <span class="project-tag">LSTM</span>
-                  <span class="project-tag">Deep Learning</span>
+                  <span class="project-tag">Text Generation</span>
+                  <span class="project-tag">Python</span>
                 </div>
                 <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
                 <div class="project-details" hidden>
-                  <p><strong>Why This Project:</strong> Created to explore the capabilities of LSTM networks in understanding and predicting language patterns, contributing to advancements in predictive text and conversational AI.</p>
+                  <p><strong>Why This Project:</strong> Created to demonstrate the capabilities of NLP in understanding context and generating human-like text, aiding writers and content creators.</p>
                   
                   <h4>Project Overview</h4>
-                  <p>This project involves building a predictive text model that suggests the next word in a sentence based on the context provided by the previous words, using LSTM (Long Short-Term Memory) networks.</p>
+                  <p>This project focuses on building a next-word prediction model that suggests the most likely next word in a given text context, enhancing writing efficiency and creativity.</p>
                   
                   <h4>Technical Implementation</h4>
                   <div class="tech-stack">
@@ -1240,72 +1339,776 @@
                   
                   <h4>Key Features</h4>
                   <ul>
-                    <li>Trained on large text corpora for diverse language understanding</li>
-                    <li>Predicts next word with high accuracy</li>
-                    <li>Can be integrated into chatbots and writing assistants</li>
+                    <li>Contextual word prediction using LSTM/GRU networks</li>
+                    <li>Customizable model training with user data</li>
+                    <li>Integration with text editors and IDEs</li>
+                    <li>Web demo for real-time predictions</li>
                   </ul>
                   
                   <h4>Challenges & Solutions</h4>
-                  <p>Key challenges included training the LSTM model for optimal performance and ensuring it could generalize well to new, unseen text. These were addressed by using dropout layers to prevent overfitting and by carefully tuning the model hyperparameters.</p>
+                  <p>Key challenges included training the model to understand context over long text spans and optimizing the prediction speed. These were addressed by using advanced RNN architectures and optimizing the model inference pipeline.</p>
                   
                   <div class="project-links">
                     <a href="https://github.com/harsh-codess/Next-word-prediction" target="_blank">GitHub Repo →</a>
+                    <a href="https://next-word-prediction-5kbsmgiibjrewtjhqhcsvo.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
                   </div>
                 </div>
-                <div class="project-card__actions">                  <a href="https://github.com/harsh-codess/Next-word-prediction" class="project-btn-primary">
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/Next-word-prediction" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://next-word-prediction-5kbsmgiibjrewtjhqhcsvo.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Apple Website Clone Card -->
+            <div class="project-card project-card--charcoal" data-category="web">
+              <div class="project-card__content">
+                <h3 class="project-card__title">Apple Website Clone</h3>
+                <div class="project-card__description">
+                  Pixel-perfect frontend recreation of Apple's website with smooth animations and responsive design using pure HTML, CSS, and JavaScript.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">HTML</span>
+                  <span class="project-tag">CSS</span>
+                  <span class="project-tag">JavaScript</span>
+                  <span class="project-tag">GSAP</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Developed to master advanced frontend techniques by replicating one of the most sophisticated and visually appealing websites, focusing on animations, responsive design, and user experience.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This frontend project recreates Apple's homepage with meticulous attention to detail, implementing smooth scrolling animations, responsive layouts, and interactive elements using modern web technologies without any backend dependencies.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">Vanilla JavaScript</span>
+                    <span class="tech-tag">GSAP</span>
+                    <span class="tech-tag">Responsive Design</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Pixel-perfect responsive design across all devices</li>
+                    <li>Smooth scroll animations and transitions using GSAP</li>
+                    <li>Interactive product showcases and hover effects</li>
+                    <li>Optimized performance with lazy loading</li>
+                    <li>Cross-browser compatibility and accessibility</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Replicating Apple's sophisticated visual effects and ensuring smooth performance across devices were major challenges. These were solved through advanced CSS techniques, optimized JavaScript animations, and careful performance profiling to maintain 60fps animations.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/apple-website-clone" target="_blank">GitHub Repo →</a>
+                    <a href="https://clonewebs2.netlify.app/" target="_blank">Live Demo →</a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/apple-website-clone" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://clonewebs2.netlify.app/" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- YouTube Clone Card - Updated to focus on frontend only -->
+            <div class="project-card project-card--crimson" data-category="web">
+              <div class="project-card__content">
+                <h3 class="project-card__title">YouTube Clone</h3>
+                <div class="project-card__description">
+                  Frontend recreation of YouTube's interface with video streaming capabilities, search functionality, and responsive design using React and YouTube API.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">React</span>
+                  <span class="project-tag">YouTube API</span>
+                  <span class="project-tag">CSS3</span>
+                  <span class="project-tag">JavaScript</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Built to demonstrate proficiency in React development and API integration by recreating one of the world's most popular video platforms with modern frontend technologies.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This frontend application recreates YouTube's core interface and functionality using React, featuring video search, playback, and responsive design while integrating with YouTube's official API for real video content.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">React.js</span>
+                    <span class="tech-tag">YouTube Data API</span>
+                    <span class="tech-tag">CSS Modules</span>
+                    <span class="tech-tag">React Hooks</span>
+                    <span class="tech-tag">Responsive Design</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Real-time video search with YouTube API integration</li>
+                    <li>Responsive video player with custom controls</li>
+                    <li>Dynamic video recommendations and suggestions</li>
+                    <li>Mobile-first responsive design</li>
+                    <li>Component-based architecture for scalability</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Managing API rate limits, implementing smooth video playback, and creating a responsive layout that works across all devices were key challenges. Solutions included efficient API call optimization, custom video player implementation, and flexible CSS Grid/Flexbox layouts.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/youtube-clone" target="_blank">GitHub Repo →</a>
+                    <a href="https://youtubecloneharshgidwani.netlify.app/" target="_blank">Live Demo →</a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/youtube-clone" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://youtubecloneharshgidwani.netlify.app/" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- IMDB Sentiment Analysis Card -->
+            <div class="project-card project-card--maroon" data-category="ai-ml">
+              <div class="project-card__content">
+                <h3 class="project-card__title">IMDB Sentiment Analysis</h3>
+                <div class="project-card__description">
+                  Analyzes IMDB movie reviews to predict sentiment (positive/negative) using NLP and machine learning.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">NLP</span>
+                  <span class="project-tag">Sentiment Analysis</span>
+                  <span class="project-tag">Python</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Developed to explore sentiment analysis techniques and their application in understanding public opinion and improving movie recommendation systems.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project implements a sentiment analysis pipeline that processes IMDB movie reviews, extracting features and training models to predict sentiment polarity.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Scikit-learn</span>
+                    <span class="tech-tag">NLTK</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">Matplotlib</span>
+                    <span class="tech-tag">Seaborn</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                                   <ul>
+                    <li>Text preprocessing and feature extraction</li>
+                    <li>Model training and evaluation (SVM, Naive Bayes, LSTM)</li>
+                    <li>Sentiment score visualization</li>
+                    <li>Integration with Flask for web demo</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Challenges included handling imbalanced data, selecting appropriate features, and tuning model hyperparameters for optimal performance. These were addressed through careful data preprocessing, feature engineering, and extensive model evaluation.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/IMDB-Sentiment-Analysis" target="_blank">GitHub Repo →</a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/IMDB-Sentiment-Analysis" class="project-btn-primary">
                     View Project
                   </a>
                 </div>
               </div>
             </div>
 
-            <!-- LLM Core Pipeline Card -->
-            <div class="project-card project-card--slate" data-category="ai-ml">
+            <!-- Next Word Predictor Card -->
+            <div class="project-card project-card--olive" data-category="ai-ml">
               <div class="project-card__content">
-                <h3 class="project-card__title">LLM Core Pipeline</h3>
+                <h3 class="project-card__title">Next Word Predictor</h3>
                 <div class="project-card__description">
-                  Core pipeline implementation for LLM processing and training.
+                  Predicts the next word in a sentence using advanced NLP models to assist in writing and content creation.
                 </div>
                 <div class="project-card__tags">
-                  <span class="project-tag">LLM</span>
-                  <span class="project-tag">Pipeline</span>
+                  <span class="project-tag">NLP</span>
+                  <span class="project-tag">Text Generation</span>
                   <span class="project-tag">Python</span>
                 </div>
                 <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
                 <div class="project-details" hidden>
-                  <p><strong>Why This Project:</strong> Developed to create a standardized and efficient pipeline for processing and training Large Language Models, facilitating easier experimentation and deployment of LLM-based applications.</p>
+                  <p><strong>Why This Project:</strong> Created to demonstrate the capabilities of NLP in understanding context and generating human-like text, aiding writers and content creators.</p>
                   
                   <h4>Project Overview</h4>
-                  <p>This project focuses on building a robust pipeline for processing and training Large Language Models (LLMs), ensuring efficient data handling, model training, and evaluation.</p>
+                  <p>This project focuses on building a next-word prediction model that suggests the most likely next word in a given text context, enhancing writing efficiency and creativity.</p>
                   
                   <h4>Technical Implementation</h4>
                   <div class="tech-stack">
-                    <span class="tech-tag">Python</span>
                     <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Keras</span>
+                    <span class="tech-tag">NLTK</span>
                     <span class="tech-tag">Pandas</span>
-                    <span class="tech-tag">NumPy</span>
                   </div>
                   
                   <h4>Key Features</h4>
                   <ul>
-                    <li>End-to-end pipeline from data preprocessing to model training</li>
-                    <li>Supports multiple LLM architectures</li>
-                    <li>Integration with TensorFlow for scalable training</li>
+                    <li>Contextual word prediction using LSTM/GRU networks</li>
+                    <li>Customizable model training with user data</li>
+                    <li>Integration with text editors and IDEs</li>
+                    <li>Web demo for real-time predictions</li>
                   </ul>
                   
                   <h4>Challenges & Solutions</h4>
-                  <p>Ensuring the pipeline's flexibility and scalability to accommodate different LLMs and large datasets was a key challenge. This was addressed by designing modular pipeline components and optimizing data flow and model training processes.</p>
+                  <p>Key challenges included training the model to understand context over long text spans and optimizing the prediction speed. These were addressed by using advanced RNN architectures and optimizing the model inference pipeline.</p>
                   
                   <div class="project-links">
-                    <a href="https://github.com/harsh-codess/llm-core-pipeline" target="_blank">GitHub Repo →</a>
+                    <a href="https://github.com/harsh-codess/Next-word-prediction" target="_blank">GitHub Repo →</a>
+                    <a href="https://next-word-prediction-5kbsmgiibjrewtjhqhcsvo.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
                   </div>
                 </div>
-                <div class="project-card__actions">                  <a href="https://github.com/harsh-codess/llm-core-pipeline" class="project-btn-primary">
-                    View Project
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/Next-word-prediction" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://next-word-prediction-5kbsmgiibjrewtjhqhcsvo.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
                   </a>
                 </div>
               </div>
             </div>
+
+            <!-- Apple Website Clone Card -->
+            <div class="project-card project-card--charcoal" data-category="web">
+              <div class="project-card__content">
+                <h3 class="project-card__title">Apple Website Clone</h3>
+                <div class="project-card__description">
+                  Pixel-perfect frontend recreation of Apple's website with smooth animations and responsive design using pure HTML, CSS, and JavaScript.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">HTML</span>
+                  <span class="project-tag">CSS</span>
+                  <span class="project-tag">JavaScript</span>
+                  <span class="project-tag">GSAP</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Developed to master advanced frontend techniques by replicating one of the most sophisticated and visually appealing websites, focusing on animations, responsive design, and user experience.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This frontend project recreates Apple's homepage with meticulous attention to detail, implementing smooth scrolling animations, responsive layouts, and interactive elements using modern web technologies without any backend dependencies.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">Vanilla JavaScript</span>
+                    <span class="tech-tag">GSAP</span>
+                    <span class="tech-tag">Responsive Design</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Pixel-perfect responsive design across all devices</li>
+                    <li>Smooth scroll animations and transitions using GSAP</li>
+                    <li>Interactive product showcases and hover effects</li>
+                    <li>Optimized performance with lazy loading</li>
+                    <li>Cross-browser compatibility and accessibility</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Replicating Apple's sophisticated visual effects and ensuring smooth performance across devices were major challenges. These were solved through advanced CSS techniques, optimized JavaScript animations, and careful performance profiling to maintain 60fps animations.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/apple-website-clone" target="_blank">GitHub Repo →</a>
+                    <a href="https://clonewebs2.netlify.app/" target="_blank">Live Demo →</a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/apple-website-clone" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://clonewebs2.netlify.app/" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- YouTube Clone Card - Updated to focus on frontend only -->
+            <div class="project-card project-card--crimson" data-category="web">
+              <div class="project-card__content">
+                <h3 class="project-card__title">YouTube Clone</h3>
+                <div class="project-card__description">
+                  Frontend recreation of YouTube's interface with video streaming capabilities, search functionality, and responsive design using React and YouTube API.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">React</span>
+                  <span class="project-tag">YouTube API</span>
+                  <span class="project-tag">CSS3</span>
+                  <span class="project-tag">JavaScript</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Built to demonstrate proficiency in React development and API integration by recreating one of the world's most popular video platforms with modern frontend technologies.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This frontend application recreates YouTube's core interface and functionality using React, featuring video search, playback, and responsive design while integrating with YouTube's official API for real video content.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">React.js</span>
+                    <span class="project-tag">YouTube Data API</span>
+                    <span class="tech-tag">CSS Modules</span>
+                    <span class="tech-tag">React Hooks</span>
+                    <span class="tech-tag">Responsive Design</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Real-time video search with YouTube API integration</li>
+                    <li>Responsive video player with custom controls</li>
+                    <li>Dynamic video recommendations and suggestions</li>
+                    <li>Mobile-first responsive design</li>
+                    <li>Component-based architecture for scalability</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Managing API rate limits, implementing smooth video playback, and creating a responsive layout that works across all devices were key challenges. Solutions included efficient API call optimization, custom video player implementation, and flexible CSS Grid/Flexbox layouts.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/youtube-clone" target="_blank">GitHub Repo →</a>
+                    <a href="https://youtubecloneharshgidwani.netlify.app/" target="_blank">Live Demo →</a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/youtube-clone" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://youtubecloneharshgidwani.netlify.app/" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- mathGPT Card -->
+            <div class="project-card project-card--blue" data-category="ai-ml">
+              <div class="project-card__content">
+                <h3 class="project-card__title">mathGPT</h3>
+                <div class="project-card__description">
+                  An AI bot that answers all your math questions querying through a Gemma transformer model.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">Python</span>
+                  <span class="project-tag">Gemma</span>
+                  <span class="project-tag">Transformer</span>
+                  <span class="project-tag">Math AI</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Created to demonstrate the power of specialized AI models in solving mathematical problems, making advanced math assistance accessible to students and professionals.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>mathGPT is an intelligent mathematical assistant that leverages Google's Gemma transformer model to solve complex mathematical problems across various domains including algebra, calculus, statistics, and more.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Gemma Model</span>
+                    <span class="tech-tag">Transformers</span>
+                    <span class="tech-tag">Mathematical Computing</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Solves complex mathematical equations and problems</li>
+                    <li>Step-by-step solution explanations</li>
+                    <li>Support for multiple mathematical domains</li>
+                    <li>Interactive problem-solving interface</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Fine-tuning the Gemma model for mathematical reasoning and ensuring accurate problem-solving across different mathematical concepts were key challenges. These were addressed through specialized prompt engineering and model optimization techniques.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/mathGPT" target="_blank">GitHub Repo →</a>
+                    <a href="https://mathgpt-harshcodess.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/mathGPT" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://mathgpt-harshcodess.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- searchBOT-AI Card -->
+            <div class="project-card project-card--green" data-category="ai-ml">
+              <div class="project-card__content">
+                <h3 class="project-card__title">searchBOT-AI</h3>
+                <div class="project-card__description">
+                  A Streamlit web application that provides an intelligent chatbot capable of searching and retrieving information from multiple sourcing formats.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">Jupyter Notebook</span>
+                  <span class="project-tag">Streamlit</span>
+                  <span class="project-tag">Search AI</span>
+                  <span class="project-tag">Information Retrieval</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Developed to create an intelligent search assistant that can process and retrieve information from diverse data sources, enhancing research and information discovery workflows.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>searchBOT-AI is an advanced search assistant built with Streamlit that combines natural language processing with intelligent information retrieval capabilities across multiple data formats and sources.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">NLP</span>
+                    <span class="tech-tag">Vector Search</span>
+                    <span class="tech-tag">Information Retrieval</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Multi-format data source integration</li>
+                    <li>Intelligent query understanding and processing</li>
+                    <li>Real-time search and retrieval capabilities</li>
+                    <li>Interactive web interface with Streamlit</li>
+                    <li>Contextual response generation</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Integrating multiple data sources and ensuring accurate information retrieval across different formats presented significant challenges. These were addressed through implementation of robust data preprocessing pipelines and advanced search algorithms.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/searchBOT-AI" target="_blank">GitHub Repo →</a>
+                    <a href="https://searchbot-ai-harshcodess.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/searchBOT-AI" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://searchbot-ai-harshcodess.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- SQL DB Agent Card -->
+            <div class="project-card project-card--orange" data-category="ai-ml">
+              <div class="project-card__content">
+                <h3 class="project-card__title">SQL DB Agent</h3>
+                <div class="project-card__description">
+                  An intelligent agent that extracts information out of a demo SQL database, allowing natural language queries to be converted into SQL commands.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">Python</span>
+                  <span class="project-tag">SQL</span>
+                  <span class="project-tag">Database</span>
+                  <span class="project-tag">NLP</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Created to bridge the gap between natural language and database queries, making database interaction accessible to non-technical users through intelligent query translation.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This SQL agent intelligently converts natural language questions into SQL queries, executes them against a database, and returns human-readable results, democratizing database access for business users.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">SQLite</span>
+                    <span class="tech-tag">Natural Language Processing</span>
+                    <span class="tech-tag">Query Generation</span>
+                    <span class="tech-tag">Database Management</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Natural language to SQL query conversion</li>
+                    <li>Intelligent query validation and optimization</li>
+                    <li>Support for complex database operations</li>
+                    <li>Error handling and query refinement</li>
+                    <li>Interactive query interface</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Understanding natural language intent and mapping it to correct SQL syntax while handling database schema complexity were major challenges. These were solved through advanced NLP techniques, schema analysis, and iterative query refinement processes.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/SQL-DB-AGENT" target="_blank">GitHub Repo →</a>
+                    <a href="https://sql-db-agent-harshcodess.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/SQL-DB-AGENT" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://sql-db-agent-harshcodess.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Deployed Chatbot Card -->
+            <div class="project-card project-card--red" data-category="ai-ml">
+              <div class="project-card__content">
+                <h3 class="project-card__title">Deployed Chatbot</h3>
+                <div class="project-card__description">
+                  A production-ready chatbot made using Groq API, deployed and optimized for real-world usage with scalable architecture.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">Jupyter Notebook</span>
+                  <span class="project-tag">Groq API</span>
+                  <span class="project-tag">Deployment</span>
+                  <span class="project-tag">Production</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Developed to showcase end-to-end chatbot deployment capabilities, from development to production, emphasizing scalability and real-world performance optimization.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This project demonstrates a complete chatbot deployment pipeline using Groq API, featuring production-ready architecture with monitoring, scaling, and maintenance considerations for enterprise-level applications.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Groq API</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Cloud Deployment</span>
+                    <span class="tech-tag">API Integration</span>
+                    <span class="tech-tag">Performance Optimization</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>High-performance inference with Groq API</li>
+                    <li>Scalable deployment architecture</li>
+                    <li>Real-time conversation capabilities</li>
+                    <li>Production monitoring and logging</li>
+                    <li>Error handling and fallback mechanisms</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Ensuring reliable performance under varying loads and implementing proper error handling for production environments were key challenges. Solutions included implementing robust API rate limiting, caching strategies, and comprehensive monitoring systems.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/deployed-chatbot" target="_blank">GitHub Repo →</a>
+                    <a href="https://harsh-codess-chatbot.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/deployed-chatbot" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://harsh-codess-chatbot.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Website and YouTube Summarizer Card -->
+            <div class="project-card project-card--teal" data-category="ai-ml">
+              <div class="project-card__content">
+                <h3 class="project-card__title">Website & YouTube Summarizer</h3>
+                <div class="project-card__description">
+                  Uses LangChain and Groq API's to transcript and summarize YouTube videos or website content, providing concise insights from lengthy materials.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">Jupyter Notebook</span>
+                  <span class="project-tag">LangChain</span>
+                  <span class="project-tag">Groq</span>
+                  <span class="project-tag">Summarization</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Built to address information overload by providing intelligent summarization of both video and web content, enabling efficient content consumption and knowledge extraction.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This dual-purpose summarization tool leverages LangChain and Groq APIs to extract, process, and summarize content from both YouTube videos and websites, making information consumption more efficient and accessible.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">LangChain</span>
+                    <span class="tech-tag">Groq API</span>
+                    <span class="tech-tag">YouTube API</span>
+                    <span class="tech-tag">Web Scraping</span>
+                    <span class="tech-tag">Text Processing</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Multi-source content processing (YouTube + Web)</li>
+                    <li>Intelligent text extraction and preprocessing</li>
+                    <li>Customizable summarization length and style</li>
+                    <li>Batch processing capabilities for multiple sources</li>
+                    <li>Export summaries in various formats</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Handling diverse content formats, ensuring accurate transcript extraction from videos, and maintaining summary quality across different content types were primary challenges. These were addressed through robust preprocessing pipelines, advanced chunking strategies, and optimized prompt engineering.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/WEBSITE-AND-YOUTUBE-SUMMARIZER" target="_blank">GitHub Repo →</a>
+                    <a href="https://website-and-youtube-harshcodess.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/WEBSITE-AND-YOUTUBE-SUMMARIZER" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://website-and-youtube-harshcodess.streamlit.app" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Apple Website Clone Card - Updated to focus on frontend only -->
+            <div class="project-card project-card--charcoal" data-category="web">
+              <div class="project-card__content">
+                <h3 class="project-card__title">Apple Website Clone</h3>
+                <div class="project-card__description">
+                  Pixel-perfect frontend recreation of Apple's website with smooth animations and responsive design using pure HTML, CSS, and JavaScript.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">HTML</span>
+                  <span class="project-tag">CSS</span>
+                  <span class="project-tag">JavaScript</span>
+                  <span class="project-tag">GSAP</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Developed to master advanced frontend techniques by replicating one of the most sophisticated and visually appealing websites, focusing on animations, responsive design, and user experience.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This frontend project recreates Apple's homepage with meticulous attention to detail, implementing smooth scrolling animations, responsive layouts, and interactive elements using modern web technologies without any backend dependencies.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">Vanilla JavaScript</span>
+                    <span class="tech-tag">GSAP</span>
+                    <span class="tech-tag">Responsive Design</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Pixel-perfect responsive design across all devices</li>
+                    <li>Smooth scroll animations and transitions using GSAP</li>
+                    <li>Interactive product showcases and hover effects</li>
+                    <li>Optimized performance with lazy loading</li>
+                    <li>Cross-browser compatibility and accessibility</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Replicating Apple's sophisticated visual effects and ensuring smooth performance across devices were major challenges. These were solved through advanced CSS techniques, optimized JavaScript animations, and careful performance profiling to maintain 60fps animations.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/apple-website-clone" target="_blank">GitHub Repo →</a>
+                    <a href="https://clonewebs2.netlify.app/" target="_blank">Live Demo →</a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/apple-website-clone" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://clonewebs2.netlify.app/" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- YouTube Clone Card - Updated to focus on frontend only -->
+            <div class="project-card project-card--crimson" data-category="web">
+              <div class="project-card__content">
+                <h3 class="project-card__title">YouTube Clone</h3>
+                <div class="project-card__description">
+                  Frontend recreation of YouTube's interface with video streaming capabilities, search functionality, and responsive design using React and YouTube API.
+                </div>
+                <div class="project-card__tags">
+                  <span class="project-tag">React</span>
+                  <span class="project-tag">YouTube API</span>
+                  <span class="project-tag">CSS3</span>
+                  <span class="project-tag">JavaScript</span>
+                </div>
+                <button class="project-toggle-btn" aria-expanded="false">Read more ↓</button>
+                <div class="project-details" hidden>
+                  <p><strong>Why This Project:</strong> Built to demonstrate proficiency in React development and API integration by recreating one of the world's most popular video platforms with modern frontend technologies.</p>
+                  
+                  <h4>Project Overview</h4>
+                  <p>This frontend application recreates YouTube's core interface and functionality using React, featuring video search, playback, and responsive design while integrating with YouTube's official API for real video content.</p>
+                  
+                  <h4>Technical Implementation</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">React.js</span>
+                    <span class="project-tag">YouTube Data API</span>
+                    <span class="tech-tag">CSS Modules</span>
+                    <span class="tech-tag">React Hooks</span>
+                    <span class="tech-tag">Responsive Design</span>
+                  </div>
+                  
+                  <h4>Key Features</h4>
+                  <ul>
+                    <li>Real-time video search with YouTube API integration</li>
+                    <li>Responsive video player with custom controls</li>
+                    <li>Dynamic video recommendations and suggestions</li>
+                    <li>Mobile-first responsive design</li>
+                    <li>Component-based architecture for scalability</li>
+                  </ul>
+                  
+                  <h4>Challenges & Solutions</h4>
+                  <p>Managing API rate limits, implementing smooth video playback, and creating a responsive layout that works across all devices were key challenges. Solutions included efficient API call optimization, custom video player implementation, and flexible CSS Grid/Flexbox layouts.</p>
+                  
+                  <div class="project-links">
+                    <a href="https://github.com/harsh-codess/youtube-clone" target="_blank">GitHub Repo →</a>
+                    <a href="https://youtubecloneharshgidwani.netlify.app/" target="_blank">Live Demo →</a>
+                  </div>
+                </div>
+                <div class="project-card__actions">
+                  <a href="https://github.com/harsh-codess/youtube-clone" class="project-btn-secondary" target="_blank">
+                    View Code
+                  </a>
+                  <a href="https://youtubecloneharshgidwani.netlify.app/" class="project-btn-primary" target="_blank">
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- ...existing code for other project cards with single buttons... -->
           </div>
         </section>
       </div>
@@ -1340,6 +2143,7 @@
           "@type": "CollectionPage",
           "name": "All Projects - Harsh Gidwani",
           "description": "Complete portfolio of AI, ML, and web development projects",
+
           "author": {
             "@type": "Person",
             "name": "Harsh Gidwani"
@@ -1378,7 +2182,9 @@
       // Fixed project toggle functionality from index.html
       document.querySelectorAll('.project-toggle-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-          const details = this.nextElementSibling;
+          // Find the details element within the same card
+          const card = this.closest('.project-card');
+          const details = card.querySelector('.project-details');
           const expanded = this.getAttribute('aria-expanded') === 'true';
           
           if (expanded) {
